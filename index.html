@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="예술의전당 정보전략부 경상문입니다. 데이터 관리와 분석, 네트워크 망 관리에 관심을 두고 일합니다.">
+  <meta name="theme-color" content="#ffffff">
+  <title>경상문 — 데이터가 쓰이는 길</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/variable/pretendardvariable-dynamic-subset.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/variable/pretendardvariable-dynamic-subset.min.css"></noscript>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "Pretendard Variable", "Malgun Gothic", sans-serif;
+      --ink: #17213a;
+      --muted: #505c73;
+      --blue: #2f4bbf;
+      --wash: #eef2ff;
+      --line: #dce4f6;
+      --surface: #f6f8fd;
+      --gutter: clamp(1.25rem, 5vw, 4rem);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      height: 100vh;
+      height: 100dvh;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr);
+      color: var(--ink);
+      background: #fff;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+    body.enhanced { grid-template-rows: minmax(0, 1fr) auto; }
+    [hidden] { display: none !important; }
+    .viewport { overflow: auto; scroll-padding-block: 1.25rem; }
+    .wrap { width: min(100% - 2 * var(--gutter), 72rem); margin-inline: auto; }
+    .icon { width: 1.35rem; height: 1.35rem; flex: none; display: inline-block; }
+    a { color: inherit; text-decoration: none; }
+    a, button { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; cursor: pointer; }
+    a:active, button:active { opacity: .82; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    p, h1, h2, h3 { margin: 0; word-break: keep-all; overflow-wrap: anywhere; }
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .6rem;
+      padding-block: 1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand, .motion-toggle, .email-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      min-height: 44px;
+    }
+    .brand { font-weight: 800; font-size: 1.125rem; }
+    .brand-mark, .section-mark {
+      display: grid;
+      place-items: center;
+      flex: none;
+      border-radius: 12px;
+      color: var(--blue);
+      background: var(--wash);
+    }
+    .brand-mark { width: 2.15rem; height: 2.15rem; }
+    .motion-toggle {
+      padding: .4rem .75rem;
+      color: var(--blue);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-weight: 700;
+    }
+    .motion-toggle:disabled { color: var(--muted); cursor: default; }
+    .hero {
+      display: grid;
+      align-items: center;
+      gap: 2rem;
+      padding-block: clamp(2.5rem, 6vw, 5rem);
+    }
+    .greeting {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--blue);
+      font-weight: 750;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(2.625rem, 5.6vw, 5.15rem);
+      line-height: 1.07;
+      letter-spacing: -.065em;
+      word-spacing: .045em;
+      font-weight: 900;
+    }
+    h1 span { display: block; color: var(--blue); }
+    .identity {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-top: clamp(1.5rem, 4vw, 2.4rem);
+    }
+    .portrait {
+      position: relative;
+      width: 4.35rem;
+      flex: 0 0 4.35rem;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 50%;
+      background: var(--wash);
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+    }
+    .portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .portrait svg { width: 56%; height: 56%; }
+    .profile-name { font-size: 1.375rem; font-weight: 850; }
+    .department { color: var(--muted); }
+    .role { color: var(--blue); font-weight: 800; min-height: 1.65em; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .hero-art {
+      position: relative;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 47%, #fff 0%, var(--wash) 68%, #e5ebff 100%);
+      border: 1px solid var(--line);
+      border-radius: clamp(1.5rem, 4vw, 2.4rem);
+      aspect-ratio: 1.24;
+    }
+    .hero-art > svg { display: block; width: 100%; height: 100%; }
+    .section {
+      padding-block: clamp(2.6rem, 6vw, 4.75rem);
+      border-top: 1px solid var(--line);
+    }
+    .section-head { display: flex; gap: .85rem; align-items: center; margin-bottom: 1.4rem; }
+    .section-mark { width: 3rem; height: 3rem; }
+    h2 {
+      font-size: clamp(1.8rem, 4.4vw, 3.05rem);
+      font-weight: 850;
+      letter-spacing: -.055em;
+      line-height: 1.19;
+    }
+    h3, .keyword-title { font-size: 1.25rem; font-weight: 820; letter-spacing: -.035em; line-height: 1.35; }
+    .intro-copy {
+      max-width: 48rem;
+      color: var(--muted);
+      font-size: clamp(1.125rem, 2.3vw, 1.35rem);
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+    .intro-copy p + p { margin-top: .7rem; }
+    .grid { display: grid; gap: .8rem; }
+    .keyword {
+      display: grid;
+      width: 100%;
+      min-height: 9.5rem;
+      padding: 0;
+      border: 0;
+      border-radius: 1.35rem;
+      background: transparent;
+      color: var(--blue);
+      text-align: left;
+      perspective: 850px;
+    }
+    .keyword-inner {
+      display: grid;
+      transform-style: preserve-3d;
+      transition: transform .45s cubic-bezier(.22,.7,.28,1);
+    }
+    .keyword[aria-pressed="true"] .keyword-inner { transform: rotateY(180deg); }
+    .keyword-face {
+      display: flex;
+      grid-area: 1 / 1;
+      flex-direction: column;
+      justify-content: center;
+      gap: .55rem;
+      padding: 1.1rem 1.25rem;
+      border: 1px solid var(--line);
+      border-radius: 1.35rem;
+      background: var(--wash);
+      backface-visibility: hidden;
+    }
+    .keyword-front { justify-content: space-between; }
+    .keyword-back { transform: rotateY(180deg); background: var(--blue); color: #fff; }
+    .keyword-front .keyword-hint { color: var(--blue); display: flex; align-items: center; justify-content: space-between; }
+    .keyword-face .icon { width: 1.5rem; height: 1.5rem; }
+    .card {
+      padding: 1.45rem;
+      border-radius: 1.35rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    .card > .icon { color: var(--blue); width: 1.65rem; height: 1.65rem; margin-bottom: .55rem; }
+    .card p, .principles p { margin-top: .5rem; color: var(--muted); }
+    .principles { padding: 0; margin: 0; list-style: none; }
+    .principles li { display: flex; gap: .9rem; align-items: flex-start; padding: 1rem .15rem; }
+    .principles li + li { border-top: 1px solid var(--line); }
+    .principles .icon { color: var(--blue); margin-top: .2rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .65rem; padding: 0; margin: 0; list-style: none; }
+    .tags li {
+      border-radius: 999px;
+      padding: .5rem 1rem;
+      background: var(--wash);
+      color: var(--blue);
+      font-weight: 750;
+    }
+    .contact { padding: clamp(1.25rem, 4.5vw, 3rem); border-radius: 1.6rem; background: var(--wash); }
+    .contact .section-mark { background: #fff; }
+    .contact p { color: var(--muted); font-size: 1.125rem; }
+    .email-button {
+      margin-top: 1.15rem;
+      padding: .68rem 1.15rem;
+      border-radius: .9rem;
+      background: var(--blue);
+      color: #fff;
+      font-weight: 800;
+    }
+    .email-address { display: block; margin-top: .5rem; color: var(--blue); overflow-wrap: anywhere; }
+    .reveal { transition: opacity .55s ease, translate .55s ease; }
+    .reveal.waiting:not(:focus-within) { opacity: 0; translate: 0 1rem; }
+    .mascot-rail {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      height: calc(4.5rem + env(safe-area-inset-bottom));
+      padding: .15rem 1rem calc(.15rem + env(safe-area-inset-bottom));
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+    .mascot-button {
+      display: grid;
+      place-items: center;
+      width: 3.1rem;
+      height: 2.8rem;
+      padding: 0;
+      border: 0;
+      border-radius: .7rem;
+      background: transparent;
+      color: var(--blue);
+    }
+    .mascot-button:focus-visible { outline-offset: -3px; }
+    .mascot-button svg { width: 2.65rem; height: 2.65rem; }
+    .mascot-button.walking svg { animation: step .32s ease-in-out infinite alternate; }
+    .mascot-button.jumping svg { animation: jump .48s ease; }
+    @keyframes step { from { transform: translateY(0) rotate(-6deg); } to { transform: translateY(-3px) rotate(6deg); } }
+    @keyframes jump { 45% { transform: translateY(-12px) rotate(-9deg); } }
+    .mascot-bubble {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      padding: .05rem .65rem;
+      border-radius: .85rem;
+      background: var(--wash);
+      color: var(--blue);
+      font-weight: 800;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    .mascot-bubble::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: var(--tail, 50%);
+      border: .35rem solid transparent;
+      border-top-color: var(--wash);
+      translate: -50%;
+    }
+    html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    html[data-motion="off"] .reveal.waiting { opacity: 1; translate: none; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal.waiting { opacity: 1; translate: none; }
+    }
+    @media (min-width: 42rem) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+      .mascot-rail { padding-inline: var(--gutter); }
+    }
+    @media (min-width: 54rem) {
+      .hero { grid-template-columns: 1.18fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); }
+    }
+  </style>
+</head>
+<body>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M7 17 17 7M7 17l10 1"/><circle cx="5.5" cy="17" r="2.5"/><circle cx="18.5" cy="5.5" r="2.5"/><circle cx="19" cy="18" r="2.5"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+      <symbol id="i-motion" viewBox="0 0 24 24"><path d="M2 13h4l3-6 4 10 3-6h6"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4 21v-1a8 6 0 0 1 16 0v1"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 3v18M3 12h18"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M8 16l4-5 3 2 5-6"/></symbol>
+      <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5.5" rx="8" ry="3.5"/><path d="M4 5.5v13c0 2 3.6 3.5 8 3.5s8-1.5 8-3.5v-13M4 12c0 2 3.6 3.5 8 3.5s8-1.5 8-3.5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="3"/><path d="M9 4V2m6 2V2M9 10h6m-6 5h6"/></symbol>
+      <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 4h8l10 10-7 7L3 10V4Z"/><circle cx="7.5" cy="8" r="1"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-turn" viewBox="0 0 24 24"><path d="M5 10a7 7 0 1 1 1 7M5 5v5h5"/></symbol>
+      <symbol id="mascot-art" viewBox="0 0 160 170">
+        <path d="M60 129v15l-13 7h18m38-22v15l13 7H98" fill="none" stroke="#2f4bbf" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M37 104c-9 4-16 1-21-6m107 3c11 0 18-6 20-15" fill="none" stroke="#2f4bbf" stroke-width="5" stroke-linecap="round"/>
+        <path d="M80 30V18" stroke="#2f4bbf" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="80" cy="13" r="6" fill="#fff" stroke="#2f4bbf" stroke-width="4"/>
+        <path d="M80 29c28 0 47 19 47 47v25c0 22-15 34-47 34s-47-12-47-34V76c0-28 19-47 47-47Z" fill="#dce6ff" stroke="#2f4bbf" stroke-width="5"/>
+        <rect x="45" y="64" width="70" height="41" rx="18" fill="#fff" stroke="#2f4bbf" stroke-width="4"/>
+        <path d="M62 83v4m36-4v4m-24 4q6 7 12 0" fill="none" stroke="#2f4bbf" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M66 119h7m5 0h7m5 0h4" stroke="#2f4bbf" stroke-width="3" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="viewport">
+    <header class="bar wrap" id="top">
+      <a class="brand" href="#top">
+        <span class="brand-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-link"/></svg></span>
+        경상문
+      </a>
+      <button class="motion-toggle" type="button" hidden>
+        <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-motion"/></svg>
+        <span>움직임 끄기</span>
+      </button>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="greeting"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><use href="#i-sun"/></svg><span id="greeting">반가워요, 들러 주셔서 고마워요.</span></p>
+          <h1 id="hero-title">데이터가 쓰이는 <span>길을 만듭니다.</span></h1>
+          <div class="identity">
+            <div class="portrait">
+              <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><use href="#i-user"/></svg>
+              <img id="portrait-photo" alt="경상문 프로필 사진" hidden>
+            </div>
+            <div>
+              <p class="profile-name">경상문</p>
+              <p class="department">예술의전당 정보전략부</p>
+              <p class="role"><span class="sr-only">데이터 관리</span><span id="typed-role" aria-hidden="true">데이터 관리</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <svg viewBox="0 0 480 385" aria-hidden="true">
+            <defs>
+              <pattern id="dot-grid" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.25" fill="#bac9f1"/></pattern>
+            </defs>
+            <rect x="27" y="25" width="426" height="335" rx="20" fill="url(#dot-grid)" opacity=".65"/>
+            <ellipse cx="240" cy="195" rx="168" ry="142" fill="none" stroke="#c4d1f5" stroke-width="1.5"/>
+            <ellipse cx="240" cy="195" rx="135" ry="113" fill="none" stroke="#c4d1f5" stroke-width="1.5" stroke-dasharray="4 7"/>
+            <path d="M113 104h39q15 0 15 15v25q0 15 15 15h27m53 72h38q16 0 16 16v22q0 16 16 16h47M364 104h-35q-15 0-15 15v20q0 15-15 15h-25M113 279h24q17 0 17-17v-19q0-16 16-16h39" fill="none" stroke="#8fa6e9" stroke-width="2"/>
+            <circle cx="167" cy="133" r="4" fill="#2f4bbf"/><circle cx="316" cy="252" r="4" fill="#2f4bbf"/>
+            <circle cx="313" cy="125" r="4" fill="#2f4bbf"/><circle cx="154" cy="252" r="4" fill="#2f4bbf"/>
+            <g fill="#fff" stroke="#c4d1f5" stroke-width="1.6">
+              <rect x="67" y="75" width="74" height="58" rx="15"/>
+              <rect x="339" y="75" width="74" height="58" rx="15"/>
+              <rect x="67" y="255" width="74" height="58" rx="15"/>
+              <rect x="339" y="255" width="74" height="58" rx="15"/>
+            </g>
+            <g fill="none" stroke="#2f4bbf" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <use href="#i-database" x="90" y="90" width="28" height="28"/>
+              <use href="#i-chart" x="361" y="89" width="30" height="30"/>
+              <use href="#i-grid" x="89" y="269" width="30" height="30"/>
+              <use href="#i-link" x="361" y="269" width="30" height="30"/>
+            </g>
+            <circle cx="240" cy="194" r="93" fill="#dce6ff" stroke="#c6d3f6" stroke-width="2"/>
+            <circle cx="240" cy="194" r="82" fill="#f8faff"/>
+            <ellipse cx="240" cy="255" rx="43" ry="6" fill="#dae4ff"/>
+            <use href="#mascot-art" x="169" y="115" width="142" height="151"/>
+            <g fill="#8fa6e9"><circle cx="240" cy="53" r="4"/><circle cx="240" cy="337" r="4"/></g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="intro-title">
+        <div class="section-head">
+          <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#i-user"/></svg></span>
+          <h2 id="intro-title">필요할 때 꺼내 쓸 수 있게</h2>
+        </div>
+        <div class="intro-copy">
+          <p>예술의전당 정보전략부에서 데이터를 관리하는 경상문입니다. 필요한 정보가 어디에 있고 어떤 기준으로 정리됐는지 쉽게 파악할 수 있도록 살핍니다.</p>
+          <p>데이터를 분석할 때는 숫자가 달라진 이유부터 묻고, 비교할 수 있는 기준을 맞춰 봅니다. 네트워크를 관리할 때는 연결이 어디서 끊기는지 차근차근 확인합니다. 동료들이 정보와 연결 문제에 들이는 시간을 줄여 각자의 일에 집중할 수 있도록 돕고 싶습니다.</p>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="keyword-title">
+        <div class="section-head">
+          <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-layers"/></svg></span>
+          <h2 id="keyword-title">제가 일할 때 쓰는 세 단어</h2>
+        </div>
+        <div class="grid">
+          <button type="button" class="keyword" aria-pressed="false" aria-label="정돈, 설명 보기">
+            <span class="keyword-inner">
+              <span class="keyword-face keyword-front" aria-hidden="true">
+                <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><use href="#i-grid"/></svg>
+                <span class="keyword-title">정돈</span>
+                <span class="keyword-hint">설명 보기 <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-turn"/></svg></span>
+              </span>
+              <span class="keyword-face keyword-back" aria-hidden="true"><span class="keyword-title">정돈</span><span class="keyword-description">이름과 기준을 맞춰, 시간이 지나도 필요한 자료를 다시 찾기 쉽게 만들어요.</span></span>
+            </span>
+          </button>
+          <button type="button" class="keyword" aria-pressed="false" aria-label="맥락, 설명 보기">
+            <span class="keyword-inner">
+              <span class="keyword-face keyword-front" aria-hidden="true">
+                <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"/></svg>
+                <span class="keyword-title">맥락</span>
+                <span class="keyword-hint">설명 보기 <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-turn"/></svg></span>
+              </span>
+              <span class="keyword-face keyword-back" aria-hidden="true"><span class="keyword-title">맥락</span><span class="keyword-description">숫자가 달라지면 언제, 어떤 조건에서 달라졌는지 함께 살펴요.</span></span>
+            </span>
+          </button>
+          <button type="button" class="keyword" aria-pressed="false" aria-label="연결, 설명 보기">
+            <span class="keyword-inner">
+              <span class="keyword-face keyword-front" aria-hidden="true">
+                <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><use href="#i-link"/></svg>
+                <span class="keyword-title">연결</span>
+                <span class="keyword-hint">설명 보기 <svg class="icon" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><use href="#i-turn"/></svg></span>
+              </span>
+              <span class="keyword-face keyword-back" aria-hidden="true"><span class="keyword-title">연결</span><span class="keyword-description">연결이 끊기면 어디까지 닿는지 확인해, 먼저 살필 지점을 찾아요.</span></span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="work-title">
+        <div class="section-head">
+          <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-grid"/></svg></span>
+          <h2 id="work-title">일이 막히는 곳에서 하는 일</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65"><use href="#i-database"/></svg>
+            <h3>데이터 관리</h3>
+            <p>자료가 흩어지거나 이름이 제각각이면 같은 정보를 찾는 데도 시간이 걸려요. 자료의 분류와 이름을 정리하고, 빠지거나 겹치는 항목을 확인해 다시 쓰기 쉽게 만들어요.</p>
+          </article>
+          <article class="card">
+            <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"><use href="#i-chart"/></svg>
+            <h3>데이터 분석</h3>
+            <p>수치가 달라졌을 때 무엇부터 확인해야 할지 막막할 수 있어요. 기간과 집계 기준을 맞춰 비교하고, 변화가 두드러진 항목을 정리해 다음에 살펴볼 곳을 짚어요.</p>
+          </article>
+          <article class="card">
+            <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round"><use href="#i-link"/></svg>
+            <h3>네트워크 망 관리</h3>
+            <p>접속이 느려지거나 끊기면 업무 흐름도 멈춰요. 어떤 장비와 구간에서 문제가 생기는지 차례로 확인해 영향 범위를 좁히고, 어디부터 조치할지 판단해요.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal" aria-labelledby="principles-title">
+        <div class="section-head">
+          <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-list"/></svg></span>
+          <h2 id="principles-title">일이 바쁠수록 지키는 것</h2>
+        </div>
+        <ul class="principles">
+          <li><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg><div><h3>비교하기 전에 기준부터 맞춰요</h3><p>같은 이름의 수치도 기간이나 집계 방식이 다를 수 있어서, 출처와 조건을 먼저 확인해요.</p></div></li>
+          <li><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg><div><h3>막힌 지점부터 하나씩 확인해요</h3><p>언제부터 어떤 증상이 있었는지 살피고, 확인한 사실을 바탕으로 범위를 좁혀요.</p></div></li>
+          <li><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-check"/></svg><div><h3>다음 사람이 이어갈 수 있게 남겨요</h3><p>무엇을 확인했고 왜 그렇게 판단했는지, 같은 일이 생겼을 때 참고할 수 있게 기록해요.</p></div></li>
+        </ul>
+      </section>
+
+      <section class="section reveal" aria-labelledby="interest-title">
+        <div class="section-head">
+          <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-tag"/></svg></span>
+          <h2 id="interest-title">요즘 눈여겨보는 주제</h2>
+        </div>
+        <ul class="tags"><li>데이터 품질</li><li>데이터 분석</li><li>데이터 시각화</li><li>네트워크 망 관리</li><li>연결 상태 점검</li></ul>
+      </section>
+
+      <section class="section reveal" aria-labelledby="contact-title">
+        <div class="contact">
+          <div class="section-head">
+            <span class="section-mark"><svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mail"/></svg></span>
+            <h2 id="contact-title">궁금한 점은 메일로 만나요</h2>
+          </div>
+          <p>데이터나 네트워크에 관해 나누고 싶은 이야기가 있다면 편하게 알려 주세요. 들러 주셔서 고맙습니다.</p>
+          <a class="email-button" href="mailto:tkdans1473@sac.or.kr">
+            <svg class="icon" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-mail"/></svg> 이메일 보내기
+          </a>
+          <span class="email-address">tkdans1473@sac.or.kr</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="mascot-rail" hidden>
+    <button class="mascot-button" type="button" aria-label="캐릭터에게 인사하기">
+      <svg aria-hidden="true"><use href="#mascot-art"/></svg>
+    </button>
+    <span class="mascot-bubble" hidden aria-hidden="true">안녕하세요, 반가워요!</span>
+  </div>
+  <span id="announcement" class="sr-only" role="status"></span>
+
+  <script>
+    const portrait = document.querySelector("#portrait-photo");
+    portrait.addEventListener("load", () => { portrait.hidden = false; });
+    portrait.src = "./photo.jpg";
+
+    const hour = new Date().getHours();
+    const greeting = hour >= 5 && hour < 11 ? "좋은 아침이에요."
+      : hour >= 11 && hour < 16 ? "반가워요. 점심은 잘 챙기셨나요?"
+      : hour >= 16 && hour < 21 ? "오늘도 수고했어요. 좋은 저녁이에요."
+      : "늦은 시간에 들러 주셨네요. 반가워요.";
+    document.querySelector("#greeting").textContent = greeting;
+
+    const announcement = document.querySelector("#announcement");
+    document.querySelectorAll(".keyword").forEach((card) => {
+      const title = card.querySelector(".keyword-title").textContent;
+      const description = card.querySelector(".keyword-description").textContent;
+      card.addEventListener("click", () => {
+        const open = card.getAttribute("aria-pressed") !== "true";
+        card.setAttribute("aria-pressed", String(open));
+        card.setAttribute("aria-label", open ? `${title}, 설명 닫기` : `${title}, 설명 보기`);
+        announcement.textContent = open ? description : "";
+      });
+    });
+
+    const systemMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const motionToggle = document.querySelector(".motion-toggle");
+    const motionLabel = motionToggle.querySelector("span");
+    const viewport = document.querySelector(".viewport");
+    const typing = document.querySelector("#typed-role");
+    const role = typing.textContent;
+    const rail = document.querySelector(".mascot-rail");
+    const mascot = document.querySelector(".mascot-button");
+    const bubble = document.querySelector(".mascot-bubble");
+    let userReduced = false;
+    try { userReduced = localStorage.getItem("profile-reduce-motion") === "true"; } catch {}
+    let typingTimer;
+    let walkTimer;
+    let bubbleTimer;
+    let walking;
+    let canMove = false;
+    const sections = document.querySelectorAll(".reveal");
+    const observer = "IntersectionObserver" in window ? new IntersectionObserver((entries) => {
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+        target.classList.remove("waiting");
+        observer.unobserve(target);
+      });
+    }, { root: viewport }) : null;
+
+    function typeRole() {
+      let cursor = 0;
+      typing.textContent = "";
+      function nextCharacter() {
+        cursor += 1;
+        typing.textContent = role.slice(0, cursor);
+        if (cursor < role.length) typingTimer = setTimeout(nextCharacter, 110);
+      }
+      typingTimer = setTimeout(nextCharacter, 220);
+    }
+
+    function stopWalk() {
+      walking?.cancel();
+      walking = undefined;
+      mascot.classList.remove("walking");
+    }
+
+    function scheduleWalk(delay = 25000) {
+      clearTimeout(walkTimer);
+      if (!canMove || document.hidden || !mascot.animate) return;
+      walkTimer = setTimeout(() => {
+        if (mascot.matches(":focus-visible") || !bubble.hidden) {
+          scheduleWalk(5000);
+          return;
+        }
+        const distance = mascot.offsetLeft - 12;
+        mascot.classList.add("walking");
+        walking = mascot.animate([
+          { transform: "translateX(0)" },
+          { transform: `translateX(-${distance}px)`, offset: .49 },
+          { transform: `translateX(-${distance}px)`, offset: .51 },
+          { transform: "translateX(0)" }
+        ], { duration: Math.max(6500, distance * 22) });
+        walking.onfinish = () => {
+          stopWalk();
+          scheduleWalk();
+        };
+      }, delay);
+    }
+
+    function positionBubble() {
+      const railLeft = rail.getBoundingClientRect().left;
+      const mascotCenter = mascot.getBoundingClientRect().left - railLeft + mascot.offsetWidth / 2;
+      const left = Math.max(8, Math.min(mascotCenter - bubble.offsetWidth / 2, rail.clientWidth - bubble.offsetWidth - 8));
+      bubble.style.left = `${left}px`;
+      bubble.style.setProperty("--tail", `${Math.max(9, Math.min(mascotCenter - left, bubble.offsetWidth - 9))}px`);
+    }
+
+    function updateMotion() {
+      canMove = !systemMotion.matches && !userReduced;
+      document.documentElement.dataset.motion = canMove ? "on" : "off";
+      motionToggle.disabled = systemMotion.matches;
+      motionLabel.textContent = systemMotion.matches ? "시스템 동작 줄이기 적용 중" : canMove ? "움직임 끄기" : "움직임 켜기";
+      if (canMove) {
+        scheduleWalk(6500);
+      } else {
+        clearTimeout(typingTimer);
+        clearTimeout(walkTimer);
+        observer?.disconnect();
+        sections.forEach((section) => section.classList.remove("waiting"));
+        typing.textContent = role;
+        stopWalk();
+        mascot.classList.remove("jumping");
+        if (!bubble.hidden) positionBubble();
+      }
+    }
+
+    motionToggle.addEventListener("click", () => {
+      userReduced = !userReduced;
+      try { localStorage.setItem("profile-reduce-motion", String(userReduced)); } catch {}
+      updateMotion();
+    });
+    systemMotion.addEventListener("change", updateMotion);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        clearTimeout(walkTimer);
+        stopWalk();
+        if (!bubble.hidden) positionBubble();
+      } else {
+        scheduleWalk(6500);
+      }
+    });
+
+    mascot.addEventListener("click", () => {
+      if (walking?.playState === "running") walking.pause();
+      mascot.classList.remove("walking");
+      bubble.hidden = false;
+      positionBubble();
+      announcement.textContent = bubble.textContent;
+      if (canMove) mascot.classList.add("jumping");
+      clearTimeout(bubbleTimer);
+      bubbleTimer = setTimeout(() => {
+        bubble.hidden = true;
+        if (canMove && walking?.playState === "paused") {
+          mascot.classList.add("walking");
+          walking.play();
+        }
+      }, 3200);
+    });
+    mascot.addEventListener("animationend", (event) => {
+      if (event.animationName === "jump") mascot.classList.remove("jumping");
+    });
+    window.addEventListener("resize", () => {
+      if (walking) {
+        stopWalk();
+        scheduleWalk(6500);
+      }
+      if (!bubble.hidden) positionBubble();
+    });
+
+    document.body.classList.add("enhanced");
+    motionToggle.hidden = false;
+    rail.hidden = false;
+    updateMotion();
+    if (canMove) {
+      typeRole();
+      if (observer) sections.forEach((section) => {
+        if (section.getBoundingClientRect().top < viewport.clientHeight) return;
+        section.classList.add("waiting");
+        observer.observe(section);
+      });
+    }
+  </script>
+</body>
+</html>
